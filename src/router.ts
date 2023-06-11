@@ -1,5 +1,5 @@
 import express from 'express'
-import helloWorldRoutes from './helloWorld/helloWordHandlers'
+import pokemonRoutes from './pokemon/pokemon'
 
 const router = express.Router()
 
@@ -8,6 +8,6 @@ router.get('/health', function(req, res) {
   res.sendStatus(200)
 })
 
-router.use('/helloWorld', helloWorldRoutes) // use routes from hello world component
+router.use('/pokemon', pokemonRoutes)
 
 export default router

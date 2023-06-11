@@ -4,8 +4,7 @@ import * as bodyParser from 'body-parser'
 import morgan from 'morgan'
 import router from './router'
 import cors from 'cors'
-import { createDatabase } from './database'
-import { Pokemon } from './interfaces'
+import { createDatabase, UserData } from './database'
 
 export const app = express()
 
@@ -28,15 +27,6 @@ app.use('/', router)
 app.use(defaultRoute) // default route has to be last route
 app.use(errorHandler) // Error handler goes last
 
-const PokemonDB = createDatabase<Pokemon>();
-PokemonDB.instance.onBeforeAdd(({
-    newValue,
-    value
-}) => {
-    console.log({newValue, value});
-});
-PokemonDB.instance.onAfterAdd(({
-    value
-}) => {
-    console.log(value);
-});
+const PokemonDB = createDatabase<UserData>();
+
+export default PokemonDB;
