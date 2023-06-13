@@ -18,6 +18,19 @@ interface Database<T extends BaseData> {
 
 export function createDatabase<T extends BaseData>() {
     class InMemoryDatabase implements Database<T> {
+        static instance: InMemoryDatabase;
+
+        private constructor() {
+            console.log("constructor called!");
+        }
+
+        public static getInstance(): InMemoryDatabase {
+            if (!InMemoryDatabase.instance) {
+                InMemoryDatabase.instance = new InMemoryDatabase();
+            }
+            return InMemoryDatabase.instance;
+        }
+
         private db: Record<string, T> = {};
         private observers: Observer[] = [];
 
@@ -50,6 +63,5 @@ export function createDatabase<T extends BaseData>() {
           }
     }
 
-    const db = new InMemoryDatabase();
-    return db;
+    return InMemoryDatabase.getInstance();
 }
