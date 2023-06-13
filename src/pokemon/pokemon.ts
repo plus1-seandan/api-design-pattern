@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import PokemonDB from '../app';
+import { PokemonFactory } from '../utils/query';
 
 const router = Router()
 
@@ -14,14 +15,13 @@ router.get('/pokemon', (req, res) => {
 
 
 router.post('/pokemon', (req, res) => {
-  const {id, password, nickname, followers} = req.body;
-  const user = PokemonDB.set({
-    id,
-    password,
-    nickname,
-    followers
-  });
-  res.json({message: "Success"});
+  const {id, type, attack, defense, special} = req.body;
+  const pokemonFactory = new PokemonFactory();
+  
+  const pokemon = pokemonFactory.createPokemon(id, type, attack, defense, special);
+
+  const user = PokemonDB.set(pokemon);
+  res.json(pokemon);
 })
 
 export default router
