@@ -4,8 +4,6 @@ import * as bodyParser from 'body-parser'
 import morgan from 'morgan'
 import router from './router'
 import cors from 'cors'
-import { createDatabase, PokemonData } from './database'
-import { LoggingObserver } from './observer'
 
 export const app = express()
 
@@ -28,8 +26,3 @@ app.use('/', router)
 app.use(defaultRoute) // default route has to be last route
 app.use(errorHandler) // Error handler goes last
 
-const PokemonDB = createDatabase<PokemonData>();
-const loggingObserver = new LoggingObserver();
-PokemonDB.addObserver(loggingObserver);
-
-export default PokemonDB;

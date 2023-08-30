@@ -1,5 +1,5 @@
 import express from 'express'
-import pokemonRoutes from './pokemon/pokemon'
+import donut from './web/donutController'
 
 const router = express.Router()
 
@@ -8,6 +8,6 @@ router.get('/health', function(req, res) {
   res.sendStatus(200)
 })
 
-router.use('/pokemon', pokemonRoutes)
+router.use('/donut', donut)
 
 export default router
